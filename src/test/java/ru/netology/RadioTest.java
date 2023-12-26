@@ -85,4 +85,43 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void setCountOfStationTest () {
+        Radio radio = new Radio(25);
+        radio.setCountOfStation(20);
+        int expected = 20;
+        int actual = radio.getCountOfStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "10,0",
+            "10,-15",
+            "30, 30"
+    })
+    public void createRadioWithCountOfStation (int expected, int count) {
+        Radio radio = new Radio(count);
+
+        int actual = radio.getCountOfStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "10,0",
+            "10,-8",
+            "14, 14"
+    })
+    public void setCountOfStationTest (int expected, int count) {
+        Radio radio = new Radio();
+
+        radio.setCountOfStation(count);
+        int actual = radio.getCountOfStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
 }
