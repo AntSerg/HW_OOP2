@@ -14,7 +14,7 @@ public class RadioTest {
             "0,-1",
             "0,12"
     })
-    public void setNumberOfStationTest (int expected, int stationNumber) {
+    public void setNumberOfStationTest(int expected, int stationNumber) {
         Radio radio = new Radio();
 
         radio.setNumberOfStation(stationNumber);
@@ -28,7 +28,7 @@ public class RadioTest {
             "1,0",
             "0,9"
     })
-    public void nextNumberOfStationTest (int expected, int stationNumber) {
+    public void nextNumberOfStationTest(int expected, int stationNumber) {
         Radio radio = new Radio();
 
         radio.setNumberOfStation(stationNumber);
@@ -43,7 +43,7 @@ public class RadioTest {
             "8,9",
             "9,0"
     })
-    public void prevNumberOfStationTest (int expected, int stationNumber) {
+    public void prevNumberOfStationTest(int expected, int stationNumber) {
         Radio radio = new Radio();
 
         radio.setNumberOfStation(stationNumber);
@@ -54,7 +54,7 @@ public class RadioTest {
     }
 
     @Test
-    public void increaseVolumeTest () {
+    public void increaseVolumeTest() {
         Radio radio = new Radio();
         for (int i = 0; i <= 100; i++) {
             radio.increaseVolume();
@@ -66,7 +66,7 @@ public class RadioTest {
     }
 
     @Test
-    public void decreaseVolumeUnderDownBorder () {
+    public void decreaseVolumeUnderDownBorder() {
         Radio radio = new Radio();
         radio.decreaseVolume();
         int expected = 0;
@@ -76,12 +76,51 @@ public class RadioTest {
     }
 
     @Test
-    public void decreaseVolumeIntoBorder () {
+    public void decreaseVolumeIntoBorder() {
         Radio radio = new Radio();
         radio.increaseVolume();
         radio.decreaseVolume();
         int expected = 0;
         int actual = radio.getVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void setCountOfStationTest() {
+        Radio radio = new Radio(25);
+        radio.setCountOfStation(20);
+        int expected = 20;
+        int actual = radio.getCountOfStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "10,0",
+            "10,-15",
+            "30, 30"
+    })
+    public void createRadioWithCountOfStation(int expected, int count) {
+        Radio radio = new Radio(count);
+
+        int actual = radio.getCountOfStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "10,0",
+            "10,-8",
+            "14, 14"
+    })
+    public void setCountOfStationTest(int expected, int count) {
+        Radio radio = new Radio();
+
+        radio.setCountOfStation(count);
+        int actual = radio.getCountOfStation();
 
         Assertions.assertEquals(expected, actual);
     }
